@@ -1,0 +1,57 @@
+﻿.regTable{
+    height:350px;
+     width:50%;
+ }
+ .inputStyle{
+     border-radius:5px;
+     text-align:center;
+     height:30px;
+     width:300px;
+ }
+ ul li a {
+     color:black;
+ }
+
+ .loginTable{
+    height:250px;
+     width:30%;
+ }
+
+ .inputStyleBtn{
+     border-radius:5px;
+      text-align:center;
+     height:30px;
+     width:140px;
+ }
+
+ .modalPop
+{
+    background-color:Black;
+        filter:alpha(opacity=90);
+        opacity:0.8;
+}
+
+.modalP
+{
+        background-color:#8d998d;
+        border-width:3px;
+        border-style:solid;
+        border-color:Black; 
+        padding-left:10px;
+        width:1000px;
+        height:600px;       
+}
+
+.askcontent{
+    height:400px;
+    width:100%;
+    background-color:bisque;
+
+}
+
+.askTitle{
+    height:40px;
+    width:500px;
+    border-radius:5px;
+    border-bottom-color:blue;
+}

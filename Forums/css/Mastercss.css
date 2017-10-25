@@ -1,0 +1,21 @@
+﻿
+.masterMenu{
+    height:50px;
+    background-color:#fafafb;
+}
+.masterBody{
+    margin-top:50px;
+    height:900px;
+    background-color:#ffffff;
+}
+.searchStyle{
+    height:30px;
+    width:300px;
+    border-color:#ffffff;
+    border-radius:5px;
+}
+.searchImage{
+    height:15px;
+    width:25px;
+    border-color:#ffffff;
+}

@@ -1,0 +1,52 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="index.master.cs" Inherits="Forums.index" %>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <link href="css/Mastercss.css" rel="stylesheet" />
+    <link href="css/AccountPageStyle.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 masterMenu navbar-fixed-top">
+                                <ul class="nav navbar-nav navbar-right">   
+                                    <li><a href="welcomePage.aspx">Questions</a> </li>                          
+                                    <li><a href="Tags.aspx" >Tags</a></li>
+                                    <li><a href="AskQuestion.aspx">Ask Question</a></li>
+                                    <li><a href="ShowUser.aspx" >Users</a></li>
+                                    <li><a href="Login.aspx"><asp:Label ID="lblLogin" runat="server"></asp:Label></a></li>
+                                    <li class="btn-danger"><asp:LinkButton ID="btnsign" runat="server" OnClick="btnsign_Click"></asp:LinkButton></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 masterBody">
+                                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                    <asp:ContentPlaceHolder ID="ContentPlaceHolderListItem" runat="server">
+                                    </asp:ContentPlaceHolder>
+                                </div>
+                                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                                    <asp:ContentPlaceHolder ID="ContentPlaceHolderBody" runat="server">
+                                    </asp:ContentPlaceHolder>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

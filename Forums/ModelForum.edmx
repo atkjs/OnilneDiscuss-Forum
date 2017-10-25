@@ -1,0 +1,406 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ForumModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Answer">
+          <Key>
+            <PropertyRef Name="AnswerId" />
+          </Key>
+          <Property Name="AnswerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AnswerDetails" Type="varchar" MaxLength="500" />
+          <Property Name="DateAndTime" Type="varchar" MaxLength="25" />
+          <Property Name="QuestionId" Type="int" />
+          <Property Name="UserId" Type="int" />
+        </EntityType>
+        <EntityType Name="AskQuestion">
+          <Key>
+            <PropertyRef Name="QuestionId" />
+          </Key>
+          <Property Name="QuestionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="QuestionTitle" Type="varchar" MaxLength="25" />
+          <Property Name="QuestionDetails" Type="varchar" MaxLength="500" />
+          <Property Name="Tags" Type="varchar" MaxLength="25" />
+          <Property Name="DateAndTime" Type="varchar" MaxLength="25" />
+          <Property Name="UserId" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_user">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="25" Nullable="false" />
+        </EntityType>
+        <EntityType Name="userDetails">
+          <Key>
+            <PropertyRef Name="UserDetailsId" />
+          </Key>
+          <Property Name="UserDetailsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="100" />
+          <Property Name="location" Type="varchar" MaxLength="100" />
+          <Property Name="carear" Type="varchar" MaxLength="100" />
+          <Property Name="about" Type="varchar" MaxLength="100" />
+          <Property Name="UserId" Type="int" />
+        </EntityType>
+        <Association Name="FK__Answer__Question__07F6335A">
+          <End Role="AskQuestion" Type="Self.AskQuestion" Multiplicity="0..1" />
+          <End Role="Answer" Type="Self.Answer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AskQuestion">
+              <PropertyRef Name="QuestionId" />
+            </Principal>
+            <Dependent Role="Answer">
+              <PropertyRef Name="QuestionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Answer__UserId__08EA5793">
+          <End Role="tbl_user" Type="Self.tbl_user" Multiplicity="0..1" />
+          <End Role="Answer" Type="Self.Answer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_user">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Answer">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AskQuesti__UserI__03317E3D">
+          <End Role="tbl_user" Type="Self.tbl_user" Multiplicity="0..1" />
+          <End Role="AskQuestion" Type="Self.AskQuestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_user">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="AskQuestion">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__userDetai__UserI__2E1BDC42">
+          <End Role="tbl_user" Type="Self.tbl_user" Multiplicity="0..1" />
+          <End Role="userDetails" Type="Self.userDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_user">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="userDetails">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="ShowTags" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="ShowUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="ShowUserDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="ForumModelStoreContainer">
+          <EntitySet Name="Answer" EntityType="Self.Answer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AskQuestion" EntityType="Self.AskQuestion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_user" EntityType="Self.tbl_user" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="userDetails" EntityType="Self.userDetails" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Answer__Question__07F6335A" Association="Self.FK__Answer__Question__07F6335A">
+            <End Role="AskQuestion" EntitySet="AskQuestion" />
+            <End Role="Answer" EntitySet="Answer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Answer__UserId__08EA5793" Association="Self.FK__Answer__UserId__08EA5793">
+            <End Role="tbl_user" EntitySet="tbl_user" />
+            <End Role="Answer" EntitySet="Answer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AskQuesti__UserI__03317E3D" Association="Self.FK__AskQuesti__UserI__03317E3D">
+            <End Role="tbl_user" EntitySet="tbl_user" />
+            <End Role="AskQuestion" EntitySet="AskQuestion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__userDetai__UserI__2E1BDC42" Association="Self.FK__userDetai__UserI__2E1BDC42">
+            <End Role="tbl_user" EntitySet="tbl_user" />
+            <End Role="userDetails" EntitySet="userDetails" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ForumModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Answer">
+          <Key>
+            <PropertyRef Name="AnswerId" />
+          </Key>
+          <Property Name="AnswerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AnswerDetails" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="DateAndTime" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="QuestionId" Type="Int32" />
+          <Property Name="UserId" Type="Int32" />
+          <NavigationProperty Name="AskQuestion" Relationship="Self.FK__Answer__Question__07F6335A" FromRole="Answer" ToRole="AskQuestion" />
+          <NavigationProperty Name="tbl_user" Relationship="Self.FK__Answer__UserId__08EA5793" FromRole="Answer" ToRole="tbl_user" />
+        </EntityType>
+        <EntityType Name="AskQuestion">
+          <Key>
+            <PropertyRef Name="QuestionId" />
+          </Key>
+          <Property Name="QuestionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="QuestionTitle" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="QuestionDetails" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Tags" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="DateAndTime" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="UserId" Type="Int32" />
+          <NavigationProperty Name="Answers" Relationship="Self.FK__Answer__Question__07F6335A" FromRole="AskQuestion" ToRole="Answer" />
+          <NavigationProperty Name="tbl_user" Relationship="Self.FK__AskQuesti__UserI__03317E3D" FromRole="AskQuestion" ToRole="tbl_user" />
+        </EntityType>
+        <EntityType Name="tbl_user">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Answers" Relationship="Self.FK__Answer__UserId__08EA5793" FromRole="tbl_user" ToRole="Answer" />
+          <NavigationProperty Name="AskQuestions" Relationship="Self.FK__AskQuesti__UserI__03317E3D" FromRole="tbl_user" ToRole="AskQuestion" />
+          <NavigationProperty Name="userDetails" Relationship="Self.FK__userDetai__UserI__2E1BDC42" FromRole="tbl_user" ToRole="userDetails" />
+        </EntityType>
+        <EntityType Name="userDetail">
+          <Key>
+            <PropertyRef Name="UserDetailsId" />
+          </Key>
+          <Property Name="UserDetailsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Phone" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="location" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="carear" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="about" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UserId" Type="Int32" />
+          <NavigationProperty Name="tbl_user" Relationship="Self.FK__userDetai__UserI__2E1BDC42" FromRole="userDetails" ToRole="tbl_user" />
+        </EntityType>
+        <Association Name="FK__Answer__Question__07F6335A">
+          <End Role="AskQuestion" Type="Self.AskQuestion" Multiplicity="0..1" />
+          <End Role="Answer" Type="Self.Answer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AskQuestion">
+              <PropertyRef Name="QuestionId" />
+            </Principal>
+            <Dependent Role="Answer">
+              <PropertyRef Name="QuestionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Answer__UserId__08EA5793">
+          <End Role="tbl_user" Type="Self.tbl_user" Multiplicity="0..1" />
+          <End Role="Answer" Type="Self.Answer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_user">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Answer">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AskQuesti__UserI__03317E3D">
+          <End Role="tbl_user" Type="Self.tbl_user" Multiplicity="0..1" />
+          <End Role="AskQuestion" Type="Self.AskQuestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_user">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="AskQuestion">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__userDetai__UserI__2E1BDC42">
+          <End Role="tbl_user" Type="Self.tbl_user" Multiplicity="0..1" />
+          <End Role="userDetails" Type="Self.userDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_user">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="userDetails">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ForumEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Answers" EntityType="Self.Answer" />
+          <EntitySet Name="AskQuestions" EntityType="Self.AskQuestion" />
+          <EntitySet Name="tbl_user" EntityType="Self.tbl_user" />
+          <EntitySet Name="userDetails" EntityType="Self.userDetail" />
+          <AssociationSet Name="FK__Answer__Question__07F6335A" Association="Self.FK__Answer__Question__07F6335A">
+            <End Role="AskQuestion" EntitySet="AskQuestions" />
+            <End Role="Answer" EntitySet="Answers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Answer__UserId__08EA5793" Association="Self.FK__Answer__UserId__08EA5793">
+            <End Role="tbl_user" EntitySet="tbl_user" />
+            <End Role="Answer" EntitySet="Answers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AskQuesti__UserI__03317E3D" Association="Self.FK__AskQuesti__UserI__03317E3D">
+            <End Role="tbl_user" EntitySet="tbl_user" />
+            <End Role="AskQuestion" EntitySet="AskQuestions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__userDetai__UserI__2E1BDC42" Association="Self.FK__userDetai__UserI__2E1BDC42">
+            <End Role="tbl_user" EntitySet="tbl_user" />
+            <End Role="userDetails" EntitySet="userDetails" />
+          </AssociationSet>
+          <FunctionImport Name="ShowTags" ReturnType="Collection(ForumModel.ShowTags_Result1)" />
+          <FunctionImport Name="ShowUser" ReturnType="Collection(ForumModel.ShowUser_Result)" />
+          <FunctionImport Name="ShowUserDetails" ReturnType="Collection(ForumModel.ShowUserDetails_Result1)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="ShowTags_Result">
+          <Property Type="Int32" Name="QuestionId" Nullable="false" />
+          <Property Type="String" Name="QuestionTitle" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="QuestionDetails" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Tags" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="DateAndTime" Nullable="true" MaxLength="25" />
+          <Property Type="Int32" Name="UserId" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ShowUser_Result">
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="25" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="25" />
+        </ComplexType>
+        <ComplexType Name="ShowTags_Result1">
+          <Property Type="Int32" Name="QuestionId" Nullable="false" />
+          <Property Type="String" Name="QuestionTitle" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="QuestionDetails" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Tags" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="DateAndTime" Nullable="true" MaxLength="25" />
+          <Property Type="Int32" Name="UserId" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ShowUserDetails_Result">
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="25" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Phone" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="location" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="carear" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="about" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="ShowUserDetails1_Result">
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="25" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Phone" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="location" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="carear" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="about" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="ShowUserDetails_Result1">
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="25" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Phone" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="location" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="carear" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="about" Nullable="true" MaxLength="100" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ForumModelStoreContainer" CdmEntityContainer="ForumEntities">
+          <EntitySetMapping Name="Answers">
+            <EntityTypeMapping TypeName="ForumModel.Answer">
+              <MappingFragment StoreEntitySet="Answer">
+                <ScalarProperty Name="AnswerId" ColumnName="AnswerId" />
+                <ScalarProperty Name="AnswerDetails" ColumnName="AnswerDetails" />
+                <ScalarProperty Name="DateAndTime" ColumnName="DateAndTime" />
+                <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AskQuestions">
+            <EntityTypeMapping TypeName="ForumModel.AskQuestion">
+              <MappingFragment StoreEntitySet="AskQuestion">
+                <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+                <ScalarProperty Name="QuestionTitle" ColumnName="QuestionTitle" />
+                <ScalarProperty Name="QuestionDetails" ColumnName="QuestionDetails" />
+                <ScalarProperty Name="Tags" ColumnName="Tags" />
+                <ScalarProperty Name="DateAndTime" ColumnName="DateAndTime" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_user">
+            <EntityTypeMapping TypeName="ForumModel.tbl_user">
+              <MappingFragment StoreEntitySet="tbl_user">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="userDetails">
+            <EntityTypeMapping TypeName="ForumModel.userDetail">
+              <MappingFragment StoreEntitySet="userDetails">
+                <ScalarProperty Name="UserDetailsId" ColumnName="UserDetailsId" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="carear" ColumnName="carear" />
+                <ScalarProperty Name="about" ColumnName="about" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ShowTags" FunctionName="ForumModel.Store.ShowTags">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="ForumModel.ShowTags_Result1">
+                <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+                <ScalarProperty Name="QuestionTitle" ColumnName="QuestionTitle" />
+                <ScalarProperty Name="QuestionDetails" ColumnName="QuestionDetails" />
+                <ScalarProperty Name="Tags" ColumnName="Tags" />
+                <ScalarProperty Name="DateAndTime" ColumnName="DateAndTime" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ShowUser" FunctionName="ForumModel.Store.ShowUser">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ForumModel.ShowUser_Result">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ShowUserDetails" FunctionName="ForumModel.Store.ShowUserDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ForumModel.ShowUserDetails_Result1">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="carear" ColumnName="carear" />
+                <ScalarProperty Name="about" ColumnName="about" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Default" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
